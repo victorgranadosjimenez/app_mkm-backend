@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin(origins = "*") // Permitir peticiones desde Blumhost
+@RequestMapping("/api/auth") // 👈 más coherente con la ruta del frontend
+@CrossOrigin(origins = "*") // Permitir peticiones desde cualquier dominio (Render incluido)
 public class AuthController {
 
     private final AuthService authService;
@@ -23,13 +23,19 @@ public class AuthController {
         String password = credentials.get("password");
 
         if (authService.login(username, password)) {
-            return ResponseEntity.ok(Map.of("success", true, "message", "Login correcto"));
+            return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "message", "Login correcto"
+            ));
         } else {
-            return ResponseEntity.status(401).body(Map.of("success", false, "message", "Credenciales incorrectas"));
+            return ResponseEntity.status(401).body(Map.of(
+                    "success", false,
+                    "message", "Credenciales incorrectas"
+            ));
         }
     }
 
-    @GetMapping("/api/ping")
+    @GetMapping("/ping") // 👈 no repitas "/api"
     public String ping() {
         return "✅ App MKM is running!";
     }
