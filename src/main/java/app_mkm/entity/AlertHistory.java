@@ -11,9 +11,14 @@ public class AlertHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="card_name")
     private String cardName;
+
+    @Column(name="set_namr")
     private String setName;
     private double price;
+
+    @Column(name="match_date")
     private LocalDateTime matchDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

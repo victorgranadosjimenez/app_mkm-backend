@@ -11,15 +11,21 @@ public class Alert {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="card_name")
     private String cardName;
+
+    @Column(name="set_name")
     private String setName;
 
     @Column(name = "card_condition")
     private String condition; // "Good", "Near Mint", etc.
+
+    @Column(name="max_price")
     private double maxPrice;  // precio máximo permitido
     private String country;   // "Spain", etc.
     private String email;     // correo al que se enviará el aviso
 
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "last_triggered_at")
