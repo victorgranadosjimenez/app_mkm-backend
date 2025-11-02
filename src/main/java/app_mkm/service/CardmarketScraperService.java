@@ -23,16 +23,19 @@ public class CardmarketScraperService {
         String targetUrl = BASE_URL + setName.replace(" ", "-") + "/" + cardName.replace(" ", "-");
 
         // 🔄 Pasamos la URL por ScraperAPI
-        String proxyUrl = "https://api.scraperapi.com?api_key=" + scraperApiKey + "&url=" + targetUrl;
+        String proxyUrl = "https://api.scraperapi.com?api_key=" + scraperApiKey + "&render=true&url=" + targetUrl;
 
         System.out.println("Scraping URL via ScraperAPI: " + proxyUrl);
 
+
         Document doc = Jsoup.connect(proxyUrl)
-                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                        "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                        "Chrome/120.0.0.0 Safari/537.36")
-                .timeout(15000)
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                .timeout(20000) // 20 segundos
+                .ignoreHttpErrors(true)
+                .ignoreContentType(true)
                 .get();
+
+
 
         List<CardListing> listings = new ArrayList<>();
         Elements offers = doc.select("div.article-row");
