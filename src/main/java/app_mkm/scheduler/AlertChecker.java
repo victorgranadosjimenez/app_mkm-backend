@@ -20,12 +20,19 @@ public class AlertChecker {
         this.scraperService = scraperService;
     }
 
-    // Ejecutar cada 15 minutos
-    //@Scheduled(fixedRate = 15 * 60 * 1000)
+    // ✅ Ejecutar cada 15 minutos
+    @Scheduled(fixedRate = 15 * 60 * 1000)
     public void checkAlerts() {
-        System.out.println("🔍 Checking alerts...");
+        System.out.println("🔁 Ejecutando AlertChecker...");
 
         List<Alert> alerts = alertService.getAll();
+
+        if (alerts.isEmpty()) {
+            System.out.println("⚠️ No hay alertas registradas. Saltando ejecución.");
+            return;
+        }
+
+        System.out.println("📦 Revisando " + alerts.size() + " alertas activas...");
 
         for (Alert alert : alerts) {
             try {
@@ -37,7 +44,7 @@ public class AlertChecker {
                         .filter(l -> l.getCondition().toLowerCase().contains(alert.getCondition().toLowerCase()))
                         .findFirst()
                         .ifPresent(match -> {
-                            System.out.printf("✅ Match found: %s - %s (%s) %s%n",
+                            System.out.printf("✅ Match encontrado: %s - %s (%s) %s%n",
                                     alert.getCardName(),
                                     match.getSeller(),
                                     match.getCountry(),
@@ -46,6 +53,7 @@ public class AlertChecker {
                         });
 
             } catch (Exception e) {
+                System.err.println("❌ Error procesando alerta para " + alert.getCardName());
                 e.printStackTrace();
             }
         }
