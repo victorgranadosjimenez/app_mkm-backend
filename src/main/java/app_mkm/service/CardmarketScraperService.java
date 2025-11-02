@@ -1,5 +1,6 @@
 package app_mkm.service;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,17 +24,21 @@ public class CardmarketScraperService {
         String targetUrl = BASE_URL + setName.replace(" ", "-") + "/" + cardName.replace(" ", "-");
 
         // 🔄 Pasamos la URL por ScraperAPI
-        String proxyUrl = "https://api.scraperapi.com?api_key=" + scraperApiKey + "&render=true&url=" + targetUrl;
+        String proxyUrl = "https://api.scraperapi.com?api_key=" + scraperApiKey +
+                "&url=" + targetUrl;
 
         System.out.println("Scraping URL via ScraperAPI: " + proxyUrl);
 
-
-        Document doc = Jsoup.connect(proxyUrl)
+        Connection.Response response = Jsoup.connect(proxyUrl)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
-                .timeout(20000) // 20 segundos
+                .timeout(60000)
                 .ignoreHttpErrors(true)
                 .ignoreContentType(true)
-                .get();
+                .execute();
+
+        System.out.println("HTTP status: " + response.statusCode());
+        Document doc = response.parse();
+
 
 
 
