@@ -93,7 +93,7 @@ public class AlertChecker {
                             );
 
                             // Cambia aquí el correo destino si lo tienes en el usuario logueado
-                            emailService.sendAlertEmail("tu_correo@gmail.com", subject, text);
+                            emailService.sendAlertEmail("victorarsen@gmail.com", subject, text);
 
                             // ⏱️ Actualizar fecha de última activación
                             alert.setLastTriggeredAt(LocalDateTime.now());
