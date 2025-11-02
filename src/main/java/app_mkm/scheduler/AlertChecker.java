@@ -21,7 +21,7 @@ public class AlertChecker {
     }
 
     // Ejecutar cada 15 minutos
-    @Scheduled(fixedRate = 15 * 60 * 1000)
+    //@Scheduled(fixedRate = 15 * 60 * 1000)
     public void checkAlerts() {
         System.out.println("🔍 Checking alerts...");
 
