@@ -14,6 +14,7 @@ public class Alert {
     private String cardName;
     private String setName;
 
+    @Column(name = "card_condition")
     private String condition; // "Good", "Near Mint", etc.
     private double maxPrice;  // precio máximo permitido
     private String country;   // "Spain", etc.
