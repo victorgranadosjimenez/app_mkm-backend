@@ -62,12 +62,18 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-
+        <!--para el jsoup que lee los html-->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.17.2</version>
         </dependency>
+        <!--para el envio de emails-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
 
 
     </dependencies>

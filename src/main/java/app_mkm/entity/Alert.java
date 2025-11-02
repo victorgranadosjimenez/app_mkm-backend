@@ -22,6 +22,12 @@ public class Alert {
 
     private LocalDateTime createdAt;
 
+    @Column(name = "last_triggered_at")
+    private LocalDateTime lastTriggeredAt;
+
+
+
+
     public Alert() {
         this.createdAt = LocalDateTime.now();
     }
@@ -50,4 +56,8 @@ public class Alert {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public LocalDateTime getLastTriggeredAt() {return lastTriggeredAt;}
+    public void setLastTriggeredAt(LocalDateTime lastTriggeredAt) {this.lastTriggeredAt = lastTriggeredAt;}
+
 }
