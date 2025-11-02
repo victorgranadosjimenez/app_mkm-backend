@@ -14,7 +14,7 @@ public class AlertHistory {
     @Column(name="card_name")
     private String cardName;
 
-    @Column(name="set_namr")
+    @Column(name="set_name")
     private String setName;
     private double price;
 
