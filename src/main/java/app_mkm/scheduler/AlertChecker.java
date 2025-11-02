@@ -127,6 +127,7 @@ public class AlertChecker {
         testAlert.setMaxPrice(5000.0);
         testAlert.setLastTriggeredAt(null); // Para que no salte la restricción de 7 días
 
+        alertService.save(testAlert); // ✅ Guarda primero la alerta
         // Simular que existe una coincidencia
         double price = 4999.99;
         AlertHistory history = new AlertHistory();
@@ -136,6 +137,7 @@ public class AlertChecker {
         history.setPrice(price);
         history.setMatchDate(LocalDateTime.now());
         historyRepository.save(history);
+        System.out.println("✅ Alerta de prueba guardada correctamente");
 
         // Enviar correo
         String subject = "🔔 [TEST] Alerta activada manualmente";
@@ -158,7 +160,7 @@ public class AlertChecker {
                 LocalDateTime.now().toString()
         );
 
-        emailService.sendAlertEmail("tu_correo@gmail.com", subject, text);
+        emailService.sendAlertEmail("victorarsen@gmail.com", subject, text);
 
         System.out.println("✅ Alerta de prueba ejecutada correctamente.");
     }
