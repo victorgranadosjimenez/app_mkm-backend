@@ -1,5 +1,6 @@
 package app_mkm.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -21,9 +22,12 @@ public class AlertHistory {
     @Column(name="match_date")
     private LocalDateTime matchDate;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "alert_id")
+    @JsonIgnore
     private Alert alert;
+
 
     // Getters & Setters
     public Long getId() { return id; }
