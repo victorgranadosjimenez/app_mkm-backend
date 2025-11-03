@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class CardmarketScraperService {
 
-    @Value("${SCRAPER_API_KEY:demo}")
-    //@Value("${SCRAPER_API_KEY}")
+
+    @Value("${SCRAPER_API_KEY}")
     private String scraperApiKey;
 
     private static final String BASE_URL = "https://www.cardmarket.com/en/Magic/Products/Singles/";
