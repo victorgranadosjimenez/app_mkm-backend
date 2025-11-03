@@ -18,7 +18,8 @@ public class CardmarketScraperService {
     @Value("${SCRAPER_API_KEY}")
     private String scraperApiKey;
 
-    private static final String BASE_URL = "https://www.cardmarket.com/en/Magic/Products/Singles/";
+    private static final String BASE_URL = "https://www.cardmarket.com/Magic/Products/Singles/";
+
 
     public List<CardListing> scrapeCard(String setName, String cardName) throws IOException {
         String targetUrl = BASE_URL + setName.replace(" ", "-") + "/" + cardName.replace(" ", "-");

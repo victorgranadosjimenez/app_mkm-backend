@@ -55,7 +55,7 @@ public class AlertChecker {
                 listings.stream()
                         .filter(l -> l.getCountry().equalsIgnoreCase(alert.getCountry()))
                         .filter(l -> parsePrice(l.getPrice()) <= alert.getMaxPrice())
-                        .filter(l -> l.getCondition().toLowerCase().contains(alert.getCondition().toLowerCase()))
+                        .filter(l -> conditionMatches(l.getCondition(), alert.getCondition()))
                         .findFirst()
                         .ifPresent(match -> {
                             double price = parsePrice(match.getPrice());
@@ -106,7 +106,31 @@ public class AlertChecker {
         }
     }
 
+    //METODO AUXILIAR
     private double parsePrice(String priceText) {
         return Double.parseDouble(priceText.replace("€", "").replace(",", ".").trim());
     }
+
+
+    //METODO AUXILIAR
+    private boolean conditionMatches(String scrapedCondition, String alertCondition) {
+        String c = scrapedCondition.trim().toLowerCase();
+        String a = alertCondition.trim().toLowerCase();
+
+        // Diccionario básico de equivalencias
+        return switch (a) {
+            case "mint", "m" -> c.contains("m");
+            case "near mint", "nm" -> c.contains("nm");
+            case "excellent", "ex" -> c.contains("ex");
+            case "good", "gd" -> c.contains("gd");
+            case "light played", "lp" -> c.contains("lp");
+            case "played", "pl" -> c.contains("pl");
+            case "poor", "po" -> c.contains("po");
+            default -> c.contains(a);
+        };
+    }
+
+
+
+
 }
