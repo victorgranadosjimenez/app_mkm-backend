@@ -1,7 +1,5 @@
-
 package app_mkm;
 
-import app_mkm.scheduler.AlertChecker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -14,9 +12,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableJpaRepositories(basePackages = "app_mkm.repository")
 public class App_mkmApplication {
     public static void main(String[] args) {
-
-        var context = SpringApplication.run(App_mkmApplication.class, args);
-        context.getBean(AlertChecker.class).triggerTestAlert(); // 👈 fuerza la alerta
-
+        SpringApplication.run(App_mkmApplication.class, args);
     }
 }

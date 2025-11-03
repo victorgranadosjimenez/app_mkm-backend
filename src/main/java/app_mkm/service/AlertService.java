@@ -26,4 +26,6 @@ public class AlertService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+
 }

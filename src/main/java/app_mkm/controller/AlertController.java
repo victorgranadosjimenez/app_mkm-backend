@@ -32,10 +32,13 @@ public class AlertController {
         return ResponseEntity.ok(saved);
     }
 
-    // 🚨 Endpoint de prueba: fuerza una alerta y envía correo
-    @GetMapping("/test")
-    public ResponseEntity<String> triggerTestAlert() {
-        alertChecker.triggerTestAlert();
-        return ResponseEntity.ok("✅ Alerta de prueba ejecutada y correo enviado (revisa tu bandeja).");
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAlert(@PathVariable Long id) {
+        try {
+            alertService.delete(id);
+            return ResponseEntity.ok("✅ Alerta eliminada correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("❌ Error al eliminar la alerta");
+        }
     }
 }

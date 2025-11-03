@@ -31,8 +31,7 @@ public class AlertChecker {
         this.emailService = emailService;
     }
 
-
-    // Cada hora
+    // Ejecuta la comprobación de alertas cada hora
     @Scheduled(fixedRate = 60 * 60 * 1000)
     public void checkAlerts() {
         System.out.println("🔁 Ejecutando AlertChecker...");
@@ -45,7 +44,7 @@ public class AlertChecker {
 
         for (Alert alert : alerts) {
             try {
-                // ⏳ Saltar si la alerta ya saltó hace menos de 7 días
+                // Saltar si la alerta ya saltó hace menos de 7 días
                 if (alert.getLastTriggeredAt() != null &&
                         alert.getLastTriggeredAt().isAfter(LocalDateTime.now().minusDays(7))) {
                     continue;
@@ -63,7 +62,7 @@ public class AlertChecker {
                             System.out.printf("✅ Match encontrado: %s - %s (%s) %s%n",
                                     alert.getCardName(), match.getSeller(), match.getCountry(), match.getPrice());
 
-                            // 💾 Guardar en historial
+                            // Guardar en historial
                             AlertHistory history = new AlertHistory();
                             history.setAlert(alert);
                             history.setCardName(alert.getCardName());
@@ -72,17 +71,17 @@ public class AlertChecker {
                             history.setMatchDate(LocalDateTime.now());
                             historyRepository.save(history);
 
-                            // 📧 Enviar correo
+                            // Enviar correo
                             String subject = "🔔 Alerta activada: " + alert.getCardName();
                             String text = String.format("""
                                     Se ha encontrado una coincidencia para tu alerta:
-                                    
+
                                     Carta: %s
                                     Set: %s
                                     Condición: %s
                                     País: %s
                                     Precio: %.2f €
-                                    
+
                                     Fecha: %s
                                     """,
                                     alert.getCardName(),
@@ -93,10 +92,9 @@ public class AlertChecker {
                                     LocalDateTime.now().toString()
                             );
 
-                            // Cambia aquí el correo destino si lo tienes en el usuario logueado
                             emailService.sendAlertEmail("victorarsen@gmail.com", subject, text);
 
-                            // ⏱️ Actualizar fecha de última activación
+                            // Actualizar fecha de última activación
                             alert.setLastTriggeredAt(LocalDateTime.now());
                             alertService.save(alert);
                         });
@@ -111,60 +109,4 @@ public class AlertChecker {
     private double parsePrice(String priceText) {
         return Double.parseDouble(priceText.replace("€", "").replace(",", ".").trim());
     }
-
-
-
-
-    // 🚨 METODO PARA HACER UNA PRUEBA DE ALERT
-    public void triggerTestAlert() {
-        System.out.println("🧪 Forzando alerta de prueba...");
-
-        // Puedes personalizar estos valores
-        Alert testAlert = new Alert();
-        testAlert.setCardName("Black Lotus");
-        testAlert.setSetName("Limited Edition Alpha");
-        testAlert.setCountry("Spain");
-        testAlert.setCondition("NM");
-        testAlert.setMaxPrice(5000.0);
-        testAlert.setLastTriggeredAt(null); // Para que no salte la restricción de 7 días
-
-        alertService.save(testAlert); // ✅ Guarda primero la alerta
-        // Simular que existe una coincidencia
-        double price = 4999.99;
-        AlertHistory history = new AlertHistory();
-        history.setAlert(testAlert);
-        history.setCardName(testAlert.getCardName());
-        history.setSetName(testAlert.getSetName());
-        history.setPrice(price);
-        history.setMatchDate(LocalDateTime.now());
-        historyRepository.save(history);
-        System.out.println("✅ Alerta de prueba guardada correctamente");
-
-        // Enviar correo
-        String subject = "🔔 [TEST] Alerta activada manualmente";
-        String text = String.format("""
-            Se ha activado una alerta de prueba manualmente:
-            
-            Carta: %s
-            Set: %s
-            Condición: %s
-            País: %s
-            Precio: %.2f €
-            
-            Fecha: %s
-            """,
-                testAlert.getCardName(),
-                testAlert.getSetName(),
-                testAlert.getCondition(),
-                testAlert.getCountry(),
-                price,
-                LocalDateTime.now().toString()
-        );
-
-        emailService.sendAlertEmail("victorarsen@gmail.com", subject, text);
-
-        System.out.println("✅ Alerta de prueba ejecutada correctamente.");
-    }
-
-
 }
