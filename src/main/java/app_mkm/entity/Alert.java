@@ -2,6 +2,8 @@ package app_mkm.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "alerts")
@@ -30,6 +32,9 @@ public class Alert {
 
     @Column(name = "last_triggered_at")
     private LocalDateTime lastTriggeredAt;
+
+    @OneToMany(mappedBy = "alert", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AlertHistory> history = new ArrayList<>();
 
 
 
