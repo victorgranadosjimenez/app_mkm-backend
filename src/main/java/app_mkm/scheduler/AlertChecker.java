@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -57,9 +58,9 @@ public class AlertChecker {
                         .filter(l -> l.getCountry().equalsIgnoreCase(alert.getCountry()))
                         .filter(l -> parsePrice(l.getPrice()) <= alert.getMaxPrice())
                         .filter(l -> conditionMatches(l.getCondition(), alert.getCondition()))
-                        .filter(l -> alert.getLanguages().contains(l.getLanguage()))
-
-
+                        .filter(l -> Arrays.asList(alert.getLanguages().split(","))
+                                .stream()
+                                .anyMatch(lang -> lang.equalsIgnoreCase(l.getLanguage())))
                         .findFirst()
                         .ifPresent(match -> {
                             double price = parsePrice(match.getPrice());
