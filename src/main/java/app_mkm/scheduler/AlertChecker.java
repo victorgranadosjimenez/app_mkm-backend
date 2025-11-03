@@ -51,7 +51,8 @@ public class AlertChecker {
                 }
 
                 List<CardListing> listings = scraperService.scrapeCard(alert.getSetName(), alert.getCardName());
-
+                System.out.printf("📦 Se encontraron %d listings para %s (%s)%n",
+                        listings.size(), alert.getCardName(), alert.getSetName());
                 listings.stream()
                         .filter(l -> l.getCountry().equalsIgnoreCase(alert.getCountry()))
                         .filter(l -> parsePrice(l.getPrice()) <= alert.getMaxPrice())
