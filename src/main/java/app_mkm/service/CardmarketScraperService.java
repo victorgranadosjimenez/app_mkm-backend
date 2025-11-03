@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 public class CardmarketScraperService {
 
-
     @Value("${SCRAPER_API_KEY}")
     private String scraperApiKey;
 
@@ -53,12 +52,10 @@ public class CardmarketScraperService {
         Elements offers = doc.select("div.table-body div.article-row");
         System.out.println("🔍 Ofertas encontradas: " + offers.size());
 
-
         if (!offers.isEmpty()) {
             System.out.println("🧾 HTML del primer artículo:");
             System.out.println(offers.first().outerHtml());
         }
-
 
         List<CardListing> listings = new ArrayList<>();
 
@@ -67,10 +64,16 @@ public class CardmarketScraperService {
                 // vendedor
                 String seller = offer.select("div.col-seller a").text();
 
-                // país
+                // país del vendedor
                 Element location = offer.selectFirst("div.col-seller span[title*='Item location:']");
                 String country = (location != null)
                         ? location.attr("title").replace("Item location:", "").trim()
+                        : "Unknown";
+
+                // idioma de la carta
+                Element languageElement = offer.selectFirst("div.col-language span[aria-label]");
+                String language = (languageElement != null)
+                        ? languageElement.attr("aria-label").trim()
                         : "Unknown";
 
                 // condición
@@ -81,12 +84,11 @@ public class CardmarketScraperService {
 
                 if (seller.isEmpty() || price.isEmpty()) continue;
 
-                listings.add(new CardListing(seller, country, condition, price));
+                listings.add(new CardListing(seller, country, condition, price, language));
             } catch (Exception e) {
                 System.err.println("⚠️ Error procesando una oferta: " + e.getMessage());
             }
         }
-
 
         if (listings.isEmpty()) {
             System.out.println("❌ No se encontraron listings válidos. Verifica el set o nombre de carta.");
@@ -100,22 +102,25 @@ public class CardmarketScraperService {
         private String country;
         private String condition;
         private String price;
+        private String language; // nuevo campo
 
-        public CardListing(String seller, String country, String condition, String price) {
+        public CardListing(String seller, String country, String condition, String price, String language) {
             this.seller = seller;
             this.country = country;
             this.condition = condition;
             this.price = price;
+            this.language = language;
         }
 
         public String getSeller() { return seller; }
         public String getCountry() { return country; }
         public String getCondition() { return condition; }
         public String getPrice() { return price; }
+        public String getLanguage() { return language; }
 
         @Override
         public String toString() {
-            return seller + " (" + country + ") - " + condition + " - " + price;
+            return seller + " (" + country + ") - " + condition + " - " + price + " - " + language;
         }
     }
 }

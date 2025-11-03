@@ -57,6 +57,9 @@ public class AlertChecker {
                         .filter(l -> l.getCountry().equalsIgnoreCase(alert.getCountry()))
                         .filter(l -> parsePrice(l.getPrice()) <= alert.getMaxPrice())
                         .filter(l -> conditionMatches(l.getCondition(), alert.getCondition()))
+                        .filter(l -> alert.getLanguages().contains(l.getLanguage()))
+
+
                         .findFirst()
                         .ifPresent(match -> {
                             double price = parsePrice(match.getPrice());

@@ -26,6 +26,7 @@ public class Alert {
     private double maxPrice;  // precio máximo permitido
     private String country;   // "Spain", etc.
     private String email;     // correo al que se enviará el aviso
+    private List<String> languages;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -36,8 +37,8 @@ public class Alert {
     @OneToMany(mappedBy = "alert", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AlertHistory> history = new ArrayList<>();
 
-
-
+    public List<String> getLanguages() {return languages;}
+    public void setLanguages(List<String> languages) {this.languages = languages;}
 
     public Alert() {
         this.createdAt = LocalDateTime.now();
