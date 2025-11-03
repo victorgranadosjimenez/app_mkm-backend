@@ -69,7 +69,18 @@ public class AlertChecker {
                             history.setSetName(alert.getSetName());
                             history.setPrice(price);
                             history.setMatchDate(LocalDateTime.now());
+
+                            // 👇 Guardamos snapshot
+                            history.setAlertCardNameSnapshot(alert.getCardName());
+                            history.setAlertSetNameSnapshot(alert.getSetName());
+                            history.setAlertConditionSnapshot(alert.getCondition());
+                            history.setAlertCountrySnapshot(alert.getCountry());
+                            history.setAlertMaxPriceSnapshot(alert.getMaxPrice());
+
+                            // 👇 ahora sí guardamos
                             historyRepository.save(history);
+
+
 
                             // Enviar correo
                             String subject = "🔔 Alerta activada: " + alert.getCardName();

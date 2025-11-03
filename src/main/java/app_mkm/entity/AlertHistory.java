@@ -29,6 +29,33 @@ public class AlertHistory {
     private Alert alert;
 
 
+
+
+    private String alertCardNameSnapshot;
+    private String alertSetNameSnapshot;
+    private String alertConditionSnapshot;
+    private String alertCountrySnapshot;
+    private Double alertMaxPriceSnapshot;
+
+
+
+
+    public String getAlertCardNameSnapshot() {return alertCardNameSnapshot;}
+    public void setAlertCardNameSnapshot(String alertCardNameSnapshot) {this.alertCardNameSnapshot = alertCardNameSnapshot;}
+    public String getAlertSetNameSnapshot() {return alertSetNameSnapshot;}
+    public void setAlertSetNameSnapshot(String alertSetNameSnapshot) {this.alertSetNameSnapshot = alertSetNameSnapshot;}
+    public String getAlertConditionSnapshot() {return alertConditionSnapshot;}
+    public void setAlertConditionSnapshot(String alertConditionSnapshot) {this.alertConditionSnapshot = alertConditionSnapshot;}
+    public String getAlertCountrySnapshot() {return alertCountrySnapshot;}
+    public void setAlertCountrySnapshot(String alertCountrySnapshot) {this.alertCountrySnapshot = alertCountrySnapshot;}
+    public Double getAlertMaxPriceSnapshot() {return alertMaxPriceSnapshot;}
+    public void setAlertMaxPriceSnapshot(Double alertMaxPriceSnapshot) {this.alertMaxPriceSnapshot = alertMaxPriceSnapshot;}
+
+
+
+
+
+
     // Getters & Setters
     public Long getId() { return id; }
 
