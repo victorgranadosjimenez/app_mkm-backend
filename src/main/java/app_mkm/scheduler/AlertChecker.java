@@ -58,8 +58,8 @@ public class AlertChecker {
                         .filter(l -> l.getCountry().equalsIgnoreCase(alert.getCountry()))
                         .filter(l -> parsePrice(l.getPrice()) <= alert.getMaxPrice())
                         .filter(l -> conditionMatches(l.getCondition(), alert.getCondition()))
-                        .filter(l -> Arrays.asList(alert.getLanguages().split(","))
-                                .stream()
+                        .filter(l -> Arrays.stream(alert.getLanguages().split(","))  // stream directo
+                                .map(String::trim)  // quitar espacios
                                 .anyMatch(lang -> lang.equalsIgnoreCase(l.getLanguage())))
                         .findFirst()
                         .ifPresent(match -> {
