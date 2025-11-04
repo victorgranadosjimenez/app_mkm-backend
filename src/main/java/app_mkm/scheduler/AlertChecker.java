@@ -32,8 +32,8 @@ public class AlertChecker {
         this.emailService = emailService;
     }
 
-    // Ejecuta la comprobación de alertas cada hora
-    @Scheduled(fixedRate = 60 * 60 * 1000)
+    // Ejecuta la comprobación de alertas una vez al día a las 08:00
+    @Scheduled(cron = "0 0 8 * * *")
     public void checkAlerts() {
         System.out.println("🔁 Ejecutando AlertChecker...");
 
