@@ -1,5 +1,5 @@
 # 🔍 App alert MKM
-![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm/refs/heads/master/Captura.JPG?raw=true)
+![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm-backend/refs/heads/master/Captura.JPG?raw=true)
 
 
 ## Ejemplo en vivo
@@ -76,10 +76,10 @@ Servicios externos: Cardmarket (scraper), correo electrónico para notificacione
 ## Vista previa del proyecto
 Si quieres hechas un vistazo al proyecto, te recomiendo:
 
-![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm/refs/heads/master/Captura.JPG?raw=true)
-![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm/refs/heads/master/Captura2.JPG?raw=true)
-![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm/refs/heads/master/Captura3.JPG?raw=true)
-![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm/refs/heads/master/Captura4.JPG?raw=true)
+![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm-backend/refs/heads/master/Captura.JPG?raw=true)
+![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm-backend/refs/heads/master/Captura2.JPG?raw=true)
+![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm-backend/refs/heads/master/Captura3.JPG?raw=true)
+![Imagen del proyecto](https://raw.githubusercontent.com/victorgranadosjimenez/app_mkm-backend/refs/heads/master/Captura4.JPG?raw=true)
 
 
 
